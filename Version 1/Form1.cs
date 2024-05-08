@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Version_1
 {
@@ -18,8 +20,17 @@ namespace Version_1
             InitializeComponent();
         }
 
-        // Khai báo các biến toàn cục
-        public static CongTy congty = new CongTy();
+        string chuoiketnoi = @"Data Source=TUF-DASH-F15;Initial Catalog=CONGTY;Integrated Security=True;";
+        string sql;
+        SqlConnection ketnoi;
+        SqlCommand thuchien;
+        SqlDataReader docdulieu;
+        int i = 0;
+		int dem = 1;
+
+
+		// Khai báo các biến toàn cục
+		public static CongTy congty = new CongTy();
         NhanVien nv;
 
         public static string static_MaSo, static_HoTen, static_DiaChi, static_ThongTinRieng;
@@ -52,6 +63,10 @@ namespace Version_1
 
         private void frmChinh_Load(object sender, EventArgs e)
         {
+
+            ketnoi = new SqlConnection(chuoiketnoi);
+
+
             // ListView sẽ có 10 cột
             lstView.Columns.Add("STT", 70);
             lstView.Columns.Add("Mã Số", 70);
@@ -64,14 +79,97 @@ namespace Version_1
             lstView.Columns.Add("Thông Tin Riêng", 140);
             lstView.Columns.Add("Tiền Lương Được Nhận", 90);
 
+            hienthi();
         }
         
-        int dem = 1;
+        public void hienthi()
+        {
+            lstView.Items.Clear(); // Xóa hết các dòng đang có
+            ketnoi.Open();
+            sql = @"SELECT MaSo, HoTen, DiaChi, NgaySinh, HeSoLuong, LuongCanBan,ChucVu,ThongTinThem FROM NhanVien";
+            thuchien = new SqlCommand(sql,ketnoi);
+            docdulieu = thuchien.ExecuteReader();
+
+            ListViewItem listItem = new ListViewItem();
+            i = 0; 
+            while(docdulieu.Read())
+            {
+				    
+				listItem.SubItems.Add(docdulieu[0].ToString());
+				listItem.SubItems.Add(docdulieu[1].ToString());
+				listItem.SubItems.Add(docdulieu[2].ToString());
+				listItem.SubItems.Add(docdulieu[3].ToString());
+				listItem.SubItems.Add(docdulieu[4].ToString());
+				listItem.SubItems.Add(docdulieu[5].ToString());
+                
+
+                i++;
+
+
+            }
+			lstView.Items.Add(listItem);
+
+
+			//if (docdulieu.HasRows)
+			//{
+			//	while (docdulieu.Read())
+			//	{
+			//		NhanVien employee = new NhanVien
+			//		{
+			//			_MASO = docdulieu.GetInt32(0).ToString(),
+			//			_HOTEN = docdulieu.GetString(1),
+			//			_DIACHI = docdulieu.GetInt32(2).ToString(),
+			//			_NGAYSINH = docdulieu.GetDateTime(3),
+			//			_HESOLUONG = docdulieu.GetFloat(4),
+			//			_LUONGCANBAN = docdulieu.GetFloat(5),
+			//		};
+			//		congty._DANHSACH.Add(employee);
+			//	}
+			//}
+
+			//docdulieu.Close();
+			//string[] arr = new string[10]; // tạo ra 10 phần tử tượng trưng cho 10 cột
+
+
+			//// Đổ dữ liệu nhân viên sang ListView
+
+			//arr[0] = (dem++).ToString();
+			//arr[1] = nv._MASO;
+			//arr[2] = nv._HOTEN;
+			//arr[3] = nv._DIACHI;
+			//arr[4] = nv._NGAYSINH.ToString("dd/MM/yyyy");
+			//arr[5] = nv._HESOLUONG.ToString("0.00");
+			//arr[6] = nv._LUONGCANBAN.ToString();
+			//if (nv is Designer)
+			//{
+			//	arr[7] = "Designer";
+			//	arr[8] = ((Designer)nv)._TIENTHUONG.ToString();
+			//}
+			//else if (nv is Programmer)
+			//{
+			//	arr[7] = "Programmer";
+			//	arr[8] = ((Programmer)nv)._TIENNGOAIGIO.ToString();
+			//}
+			//else if (nv is Tester)
+			//{
+			//	arr[7] = "Tester";
+			//	arr[8] = ((Tester)nv)._SOLOI.ToString();
+			//}
+			//else if (nv is Manager)
+			//{
+			//	arr[7] = "Manager";
+			//	arr[8] = "NULL";
+			//}
+			//arr[9] = nv.TinhLuong().ToString();
+
+			//ListViewItem dong = new ListViewItem(arr);
+			//lstView.Items.Add(dong);
+
+
+		}
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            //lstView.Items.Clear(); // Xóa hết các dòng đang có
-
             if (congty.KiemTraMaBiTrung(txtMaSo.Text) == false)
             {
                     MessageBox.Show("Mã số bị trùng");
@@ -319,7 +417,18 @@ namespace Version_1
         }
         public static string MaSoTimkiem;
         int idx = 0;
-        private void btnTimKiem_Click(object sender, EventArgs e)
+
+		private void btnSapXep_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void lstView_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnTimKiem_Click(object sender, EventArgs e)
         {
             
 

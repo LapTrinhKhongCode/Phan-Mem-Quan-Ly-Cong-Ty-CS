@@ -8,7 +8,10 @@ namespace Version_1
 {
     public class CongTy
     {
+
         private List<NhanVien> DanhSach = new List<NhanVien>();
+
+
 
         internal List<NhanVien> _DANHSACH
         {
