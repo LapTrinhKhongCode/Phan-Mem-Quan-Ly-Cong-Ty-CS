@@ -20,11 +20,11 @@ namespace Version_1
             InitializeComponent();
         }
 
-        string chuoiketnoi = @"Data Source=TUF-DASH-F15;Initial Catalog=CONGTY;Integrated Security=True;";
-        string sql;
-        SqlConnection ketnoi;
-        SqlCommand thuchien;
-        SqlDataReader docdulieu;
+        //string chuoiketnoi = @"Data Source=TUF-DASH-F15;Initial Catalog=CONGTY;Integrated Security=True;";
+        //string sql;
+        //SqlConnection ketnoi;
+        //SqlCommand thuchien;
+        //SqlDataReader docdulieu;
         int i = 0;
 		int dem = 1;
 
@@ -64,7 +64,7 @@ namespace Version_1
         private void frmChinh_Load(object sender, EventArgs e)
         {
 
-            ketnoi = new SqlConnection(chuoiketnoi);
+            //ketnoi = new SqlConnection(chuoiketnoi);
 
 
             // ListView sẽ có 10 cột
@@ -84,30 +84,30 @@ namespace Version_1
         
         public void hienthi()
         {
-            lstView.Items.Clear(); // Xóa hết các dòng đang có
-            ketnoi.Open();
-            sql = @"SELECT MaSo, HoTen, DiaChi, NgaySinh, HeSoLuong, LuongCanBan,ChucVu,ThongTinThem FROM NhanVien";
-            thuchien = new SqlCommand(sql,ketnoi);
-            docdulieu = thuchien.ExecuteReader();
+   //         lstView.Items.Clear(); // Xóa hết các dòng đang có
+   //         ketnoi.Open();
+   //         sql = @"SELECT MaSo, HoTen, DiaChi, NgaySinh, HeSoLuong, LuongCanBan,ChucVu,ThongTinThem FROM NhanVien";
+   //         thuchien = new SqlCommand(sql,ketnoi);
+   //         docdulieu = thuchien.ExecuteReader();
 
-            ListViewItem listItem = new ListViewItem();
-            i = 0; 
-            while(docdulieu.Read())
-            {
+   //         ListViewItem listItem = new ListViewItem();
+   //         i = 0; 
+   //         while(docdulieu.Read())
+   //         {
 				    
-				listItem.SubItems.Add(docdulieu[0].ToString());
-				listItem.SubItems.Add(docdulieu[1].ToString());
-				listItem.SubItems.Add(docdulieu[2].ToString());
-				listItem.SubItems.Add(docdulieu[3].ToString());
-				listItem.SubItems.Add(docdulieu[4].ToString());
-				listItem.SubItems.Add(docdulieu[5].ToString());
+			//	listItem.SubItems.Add(docdulieu[0].ToString());
+			//	listItem.SubItems.Add(docdulieu[1].ToString());
+			//	listItem.SubItems.Add(docdulieu[2].ToString());
+			//	listItem.SubItems.Add(docdulieu[3].ToString());
+			//	listItem.SubItems.Add(docdulieu[4].ToString());
+			//	listItem.SubItems.Add(docdulieu[5].ToString());
                 
 
-                i++;
+   //             i++;
 
 
-            }
-			lstView.Items.Add(listItem);
+   //         }
+			//lstView.Items.Add(listItem);
 
 
 			//if (docdulieu.HasRows)

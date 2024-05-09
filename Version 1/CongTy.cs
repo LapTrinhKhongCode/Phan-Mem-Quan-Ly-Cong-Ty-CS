@@ -10,9 +10,6 @@ namespace Version_1
     {
 
         private List<NhanVien> DanhSach = new List<NhanVien>();
-
-
-
         internal List<NhanVien> _DANHSACH
         {
           get { return DanhSach; }

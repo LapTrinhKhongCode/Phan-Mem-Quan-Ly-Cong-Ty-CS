@@ -65,6 +65,12 @@
     <Compile Include="FormTimKiem.Designer.cs">
       <DependentUpon>FormTimKiem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Manager.cs" />
     <Compile Include="NhanVien.cs" />
     <Compile Include="Program.cs" />
@@ -79,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTimKiem.resx">
       <DependentUpon>FormTimKiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
